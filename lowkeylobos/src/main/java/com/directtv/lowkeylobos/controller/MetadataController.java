@@ -45,7 +45,7 @@ public class MetadataController {
 	}
 	
 	@GetMapping(value = "/{resourceId}",produces = "application/json")
-	public String getMetadataById(@PathVariable(value = "resourceId") String resourceId) {
+	public String getMetadataById(@PathVariable(value = "resourceId") String resourceId) throws MetadataNotFoundException {
 		return metadataService.getMetadataById(resourceId);
 	}
 	
