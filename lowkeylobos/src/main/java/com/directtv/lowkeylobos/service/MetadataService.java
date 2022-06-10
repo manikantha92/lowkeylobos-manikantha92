@@ -54,9 +54,12 @@ public class MetadataService {
 		return restTemplate.exchange(url, HttpMethod.GET,entity, String.class);
 	}
 	
-	public String getMetadataById(String resourceId) {
+	public String getMetadataById(String resourceId) throws MetadataNotFoundException {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("resourceId", resourceId);
+		 if(restTemplate.getForObject(url+"/{resourceId}", String.class, params).isEmpty()) {
+			throw new MetadataNotFoundException("The metadata is not available for the resource: "+resourceId);
+		 }
 		return restTemplate.getForObject(url+"/{resourceId}", String.class, params);
 	}
 	
