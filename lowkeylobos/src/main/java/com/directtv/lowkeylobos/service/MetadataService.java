@@ -57,7 +57,7 @@ public class MetadataService {
 	public String getMetadataById(String resourceId) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("resourceId", resourceId);
-		return restTemplate.getForObject(url+"{resourceId}", String.class, params);
+		return restTemplate.getForObject(url+"/{resourceId}", String.class, params);
 	}
 	
 	public HttpStatus deleteMetadataById(String resourceId) throws MetadataNotFoundException {
@@ -65,7 +65,7 @@ public class MetadataService {
 		params.put("resourceId", resourceId);
 		
 		try {
-			restTemplate.delete(url+"{resourceId}",  params);
+			restTemplate.delete(url+"/{resourceId}",  params);
 			return HttpStatus.OK;
 			} catch (Exception e) {
 			throw new MetadataNotFoundException("The given resource id "+resourceId+" does not exist");
